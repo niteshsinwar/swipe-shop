@@ -22,7 +22,7 @@ export default function ProductDetail() {
     >
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 p-4 lg:p-8">
         {/* Image Gallery */}
-        <div className="sticky top-4 h-[90vh]">
+        <div className=" top-4 h-[90vh]">
           <motion.img
             src={product.image}
             alt={product.title}
