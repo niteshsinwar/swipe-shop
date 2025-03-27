@@ -11,7 +11,6 @@ export default function Navbar() {
   const { likedProducts } = useContext(LikedProductsContext);
   const isProductPage = location.pathname.startsWith('/product/');
 
- 
   // Get categories based on current page
   const getCategories = () => {
     if (location.pathname === '/') {
@@ -38,19 +37,22 @@ export default function Navbar() {
     const paramName = location.pathname === '/' ? 'category' : 'storeCategory';
     return searchParams.get(paramName) || 'all';
   };
+
   return (
     <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        {/* Main Nav Container */}
         <div className="h-16 flex items-center justify-between">
+          
           {/* Left Section */}
-          <div className="flex-1 flex items-center">
+          <div className="flex-shrink-0 flex items-center">
             {isProductPage ? (
               <button
                 onClick={() => navigate(-1)}
                 className="flex items-center text-gray-600 hover:text-gray-900 group"
               >
                 <ChevronLeftIcon className="h-5 w-5 group-hover:-translate-x-0.5 transition-transform" />
-                <span className="ml-1 text-[15px] font-medium">Back</span>
+                <span className="ml-1 text-[15px] font-medium hidden xs:inline">Back</span>
               </button>
             ) : (
               <Link 
@@ -60,14 +62,14 @@ export default function Navbar() {
                 <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
                   <ShoppingBagIcon className="w-3.5 h-3.5 text-white" />
                 </div>
-                <span className="text-xl font-semibold text-gray-900">ShopSwipe</span>
+                <span className="text-xl font-semibold text-gray-900 hidden sm:inline">ShopSwipe</span>
               </Link>
             )}
           </div>
 
-          {/* Center Section - Category Selector */}
+          {/* Center Section (Conditional) */}
           {(location.pathname === '/' || location.pathname === '/store') && (
-            <div className="flex-1 flex justify-center">
+            <div className="flex-1 min-w-0 mx-2 hidden sm:flex sm:justify-center">
               <CategorySelector
                 categories={getCategories()}
                 selectedCategory={getCurrentCategory()}
@@ -78,7 +80,7 @@ export default function Navbar() {
           )}
 
           {/* Right Section */}
-          <div className="flex-1 flex items-center justify-end">
+          <div className="flex-shrink-0 flex items-center">
             {(location.pathname === '/' || location.pathname === '/store') && (
               <Link
                 to={location.pathname === '/' ? "/store" : "/"}
@@ -86,7 +88,7 @@ export default function Navbar() {
               >
                 {location.pathname === '/' ? (
                   <>
-                    <span className="text-[15px] font-medium text-gray-600">Favorites</span>
+                    <span className="text-[15px] font-medium text-gray-600 hidden sm:inline">Favorites</span>
                     {likedProducts.length > 0 && (
                       <span className="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-medium">
                         {likedProducts.length}
@@ -94,12 +96,24 @@ export default function Navbar() {
                     )}
                   </>
                 ) : (
-                  <span className="text-[15px] font-medium text-gray-600">Discover</span>
+                  <span className="text-[15px] font-medium text-gray-600  sm:inline">Discover</span>
                 )}
               </Link>
             )}
           </div>
         </div>
+
+        {/* Mobile Category Selector */}
+        {(location.pathname === '/' || location.pathname === '/store') && (
+          <div className="pb-2 sm:hidden">
+            <CategorySelector
+              categories={getCategories()}
+              selectedCategory={getCurrentCategory()}
+              onSelect={handleCategorySelect}
+              className="w-full"
+            />
+          </div>
+        )}
       </div>
     </nav>
   );

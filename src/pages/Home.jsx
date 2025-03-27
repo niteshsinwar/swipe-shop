@@ -37,26 +37,26 @@ export default function Home() {
           ))}
       </div>
 
-      {/* Action Buttons */}
-      <div className="absolute bottom-8 w-full px-6">
-        <div className="flex justify-center gap-8">
-          <button
-            onClick={handleSwipe}
-            className="p-4 bg-white rounded-full shadow-lg shadow-red-100/50 active:scale-95 transition-transform"
-            aria-label="Reject"
-          >
-            <XMarkIcon className="w-8 h-8 text-red-500" />
-          </button>
-          
-          <button
-            onClick={handleSwipe}
-            className="p-4 bg-white rounded-full shadow-lg shadow-green-100/50 active:scale-95 transition-transform"
-            aria-label="Like"
-          >
-            <HeartIcon className="w-8 h-8 text-green-500" />
-          </button>
-        </div>
+   {/* Swipe Hint Buttons */}
+<div className="absolute bottom-8 w-full px-6">
+  <div className="flex justify-center gap-12">
+    {/* Reject Hint */}
+    <div className="flex flex-col items-center gap-2">
+      <div className="p-4 bg-white rounded-full shadow-lg shadow-red-100/30 opacity-60">
+        <XMarkIcon className="w-8 h-8 text-red-400" />
       </div>
+      <span className="text-sm font-medium text-red-400">Swipe left</span>
+    </div>
+
+    {/* Like Hint */}
+    <div className="flex flex-col items-center gap-2">
+      <div className="p-4 bg-white rounded-full shadow-lg shadow-green-100/30 opacity-60">
+        <HeartIcon className="w-8 h-8 text-green-400" />
+      </div>
+      <span className="text-sm font-medium text-green-400">Swipe right</span>
+    </div>
+  </div>
+</div>
     </div>
   );
 }
