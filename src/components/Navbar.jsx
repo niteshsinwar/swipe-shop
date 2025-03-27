@@ -88,7 +88,7 @@ export default function Navbar() {
               >
                 {location.pathname === '/' ? (
                   <>
-                    <span className="text-[15px] font-medium text-gray-600 hidden sm:inline">Favorites</span>
+                    <span className="text-[15px] font-medium text-gray-600  sm:inline">Favorites</span>
                     {likedProducts.length > 0 && (
                       <span className="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-medium">
                         {likedProducts.length}
